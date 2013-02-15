@@ -1,11 +1,11 @@
 class Sayer():
-    def __init__(self):
-        pass
+    def __init__(self, base = 10):
+        self._base = base
 
     def say(self, origin):
         result = ''
         for block in blocks(origin):
-            result += str(len(block)) + block[0];
+            result += convert(len(block), self._base) + block[0];
         return result
 
 def blocks(origin):
@@ -21,3 +21,10 @@ def findBreak(origin):
         index += 1;
     return index;
     
+def convert(number, base):
+    result = ''
+    while (number > 0):
+        modulus = number % base;
+        number /= base
+        result = str(modulus) + result
+    return result
