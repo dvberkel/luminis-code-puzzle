@@ -9,15 +9,16 @@ class Sayer():
         return result
 
 def blocks(origin):
-    if (len(origin) == 0):
-        return []
-    else:
-        index = findBreak(origin);
-        return [ origin[0:index] ] + blocks(origin[index:])
+    result, start = [], 0
+    while (start < len(origin)):
+        end = findBreak(origin, start)
+        result.append(origin[start:end])
+        start = end
+    return result
 
-def findBreak(origin):
-    index = 0
-    while (index < len(origin) and origin[0] == origin[index]):
+def findBreak(origin, start = 0):
+    index = start
+    while (index < len(origin) and origin[start] == origin[index]):
         index += 1;
     return index;
     
